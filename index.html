@@ -153,7 +153,7 @@
 
                     var randomIndex = Math.floor(Math.random() * randomWords.length);
                     var wordToSearch = randomWords[randomIndex];
-                    previousTab = window.open('https://www.bing.com/search?q=' + wordToSearch, '_blank');
+                    previousTab = window.open('https://www.bing.com/search?q=' + wordToSearch + '&setmkt=en-IN&PC=EMMX01&form=LBT003&scope=web', '_blank');
                     if (!previousTab || previousTab.closed || typeof previousTab.closed == 'undefined') {
                         document.getElementById("errorMessage").style.display = "block";
                     }

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Search</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url('bg5.jpg'); 
+        /* background-size: contain; */
+        background-size: cover;
+        background-position: center;
+    }
+    .container {
+        text-align: center;
+        background-color: rgba(255, 255, 255); 
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    }
+    h1 {
+        color: #333;
+    }
+    label {
+        margin-right: 10px;
+        font-weight: bold;
+        color: #555;
+    }
+    input[type="number"] {
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+    button {
+        padding: 10px 20px;
+        margin-top: 3%;
+        background-color: #4CAF50;
+        color: black;
+        font-weight: bold;
+        border: black solid 1px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #3f9544;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Auto Search</h1>
+    <label for="searchCount">Number of Searches:</label>
+    <input type="number" id="searchCount" min="1" step="1" value="1">
+    <br>
+    <label for="delay">Delay (in seconds):</label>
+    <input type="number" id="delay" min="1" step="1" value="3">
+    <br>
+    <button onclick="startAutoSearch()">Start Auto Search</button>
+</div>
+
+<script>
+    function startAutoSearch() {
+        var searchCount = parseInt(document.getElementById('searchCount').value);
+        var delay = parseInt(document.getElementById('delay').value) * 1000;
+        var previousTab;
+
+        for (var i = 0; i < searchCount; i++) {
+            setTimeout(function() {
+                if (previousTab) {
+                    previousTab.close(); // Close previous tab if exists
+                }
+
+                var randomWords = [
+                'apple', 'banana', 'orange', 'grape', 'pineapple', // Fruits
+                'carrot', 'broccoli', 'spinach', 'potato', 'tomato', // Vegetables
+                'dog', 'cat', 'rabbit', 'hamster', 'parrot', // Pets
+                'computer', 'keyboard', 'mouse', 'monitor', 'laptop', // Technology
+                'book', 'pen', 'pencil', 'notebook', 'marker', // School Supplies
+                'guitar', 'piano', 'violin', 'drums', 'trumpet', // Musical Instruments
+                'soccer', 'basketball', 'tennis', 'volleyball', 'baseball', // Sports
+                'painting', 'sculpture', 'photography', 'drawing', 'ceramics', // Art
+                'ocean', 'river', 'lake', 'mountain', 'forest', // Nature
+                'pizza', 'hamburger', 'sushi', 'pasta', 'sandwich', // Food
+                'car', 'bicycle', 'bus', 'train', 'plane', // Transportation
+                'mathematics', 'science', 'history', 'language', 'geography', // School Subjects
+                'doctor', 'nurse', 'hospital', 'medicine', 'health', // Healthcare
+                'house', 'apartment', 'building', 'neighborhood', 'city', // Buildings
+                'sun', 'moon', 'stars', 'planet', 'galaxy', // Space
+                'shirt', 'pants', 'dress', 'jacket', 'shoes', // Clothing
+                'beach', 'pool', 'park', 'zoo', 'museum', // Places
+                'fire', 'water', 'earth', 'air', 'energy', // Elements
+                'robot', 'alien', 'time', 'machine', 'future', // Sci-Fi
+                'money', 'bank', 'economy', 'business', 'finance', // Money
+                'camera', 'film', 'actor', 'actress', 'director', // Movies
+                'song', 'musician', 'concert', 'band', 'album', // Music
+                'paint', 'brush', 'canvas', 'palette', 'easel', // Art Supplies
+                'doctor', 'dentist', 'optometrist', 'veterinarian', 'pharmacist', // Healthcare Professions
+                'firefighter', 'police', 'paramedic', 'soldier', 'pilot', // Emergency Services
+                'teacher', 'professor', 'student', 'principal', 'classroom', // Education
+                'diamond', 'gold', 'silver', 'platinum', 'jewelry', // Precious Metals
+                'houseplant', 'cactus', 'succulent', 'fern', 'bonsai', // Plants
+                'television', 'radio', 'newspaper', 'magazine', 'internet', // Media
+                'dinosaur', 'fossil', 'archaeology', 'paleontology', 'prehistoric', // Ancient History
+                'fashion', 'design', 'style', 'couture', 'trend', // Fashion
+                'dragon', 'unicorn', 'mermaid', 'centaur', 'griffin', // Mythical Creatures
+                'chef', 'cook', 'recipe', 'kitchen', 'cuisine', // Cooking
+                'dictionary', 'thesaurus', 'encyclopedia', 'atlas', 'almanac', // Reference Books
+                'cloud', 'rain', 'snow', 'wind', 'storm', // Weather
+                'robot', 'artificial', 'intelligence', 'machine', 'learning', // AI
+                'unicorn', 'rainbow', 'fairy', 'magic', 'wizard' // Fantasy
+            ];
+
+                var randomIndex = Math.floor(Math.random() * randomWords.length);
+                var wordToSearch = randomWords[randomIndex];
+                previousTab = window.open('https://www.bing.com/search?q=' + wordToSearch, '_blank');
+            }, i * delay);
+        }
+    }
+</script>
+</body>
+</html>

@@ -93,10 +93,10 @@
     <div class="container">
         <h1>Auto Search</h1>
         <label for="searchCount">Number of Searches:</label>
-        <input type="number" id="searchCount" min="1" step="1" value="1">
+        <input type="number" id="searchCount" min="1" step="1" value="35">
         <br>
         <label for="delay">Delay (in seconds):</label>
-        <input type="number" id="delay" min="1" step="1" value="3">
+        <input type="number" id="delay" min="1" step="1" value="8">
         <br>
         <button onclick="startAutoSearch()">Start Auto Search</button>
         <p id="errorMessage" style="color: red; display: none; font-weight: bolder;">Please enable pop-ups to allow auto
@@ -115,45 +115,39 @@
                         previousTab.close(); // Close previous tab if exists
                     }
 
-                    var randomWords = [
-                        'apple', 'banana', 'orange', 'grape', 'pineapple', // Fruits
-                        'carrot', 'broccoli', 'spinach', 'potato', 'tomato', // Vegetables
-                        'dog', 'cat', 'rabbit', 'hamster', 'parrot', // Pets
-                        'computer', 'keyboard', 'mouse', 'monitor', 'laptop', // Technology
-                        'book', 'pen', 'pencil', 'notebook', 'marker', // School Supplies
-                        'guitar', 'piano', 'violin', 'drums', 'trumpet', // Musical Instruments
-                        'soccer', 'basketball', 'tennis', 'volleyball', 'baseball', // Sports
-                        'painting', 'sculpture', 'photography', 'drawing', 'ceramics', // Art
-                        'ocean', 'river', 'lake', 'mountain', 'forest', // Nature
-                        'pizza', 'hamburger', 'sushi', 'pasta', 'sandwich', // Food
-                        'car', 'bicycle', 'bus', 'train', 'plane', // Transportation
-                        'mathematics', 'science', 'history', 'language', 'geography', // School Subjects
-                        'doctor', 'nurse', 'hospital', 'medicine', 'health', // Healthcare
-                        'house', 'apartment', 'building', 'neighborhood', 'city', // Buildings
-                        'sun', 'moon', 'stars', 'planet', 'galaxy', // Space
-                        'shirt', 'pants', 'dress', 'jacket', 'shoes', // Clothing
-                        'beach', 'pool', 'park', 'zoo', 'museum', // Places
-                        'fire', 'water', 'earth', 'air', 'energy', // Elements
-                        'robot', 'alien', 'time', 'machine', 'future', // Sci-Fi
-                        'money', 'bank', 'economy', 'business', 'finance', // Money
-                        'camera', 'film', 'actor', 'actress', 'director', // Movies
-                        'song', 'musician', 'concert', 'band', 'album', // Music
-                        'paint', 'brush', 'canvas', 'palette', 'easel', // Art Supplies
-                        'doctor', 'dentist', 'optometrist', 'veterinarian', 'pharmacist', // Healthcare Professions
-                        'firefighter', 'police', 'paramedic', 'soldier', 'pilot', // Emergency Services
-                        'teacher', 'professor', 'student', 'principal', 'classroom', // Education
-                        'diamond', 'gold', 'silver', 'platinum', 'jewelry', // Precious Metals
-                        'houseplant', 'cactus', 'succulent', 'fern', 'bonsai', // Plants
-                        'television', 'radio', 'newspaper', 'magazine', 'internet', // Media
-                        'dinosaur', 'fossil', 'archaeology', 'paleontology', 'prehistoric', // Ancient History
-                        'fashion', 'design', 'style', 'couture', 'trend', // Fashion
-                        'dragon', 'unicorn', 'mermaid', 'centaur', 'griffin', // Mythical Creatures
-                        'chef', 'cook', 'recipe', 'kitchen', 'cuisine', // Cooking
-                        'dictionary', 'thesaurus', 'encyclopedia', 'atlas', 'almanac', // Reference Books
-                        'cloud', 'rain', 'snow', 'wind', 'storm', // Weather
-                        'robot', 'artificial', 'intelligence', 'machine', 'learning', // AI
-                        'unicorn', 'rainbow', 'fairy', 'magic', 'wizard' // Fantasy
+                   var randomWords = [
+                      "Butterfly", "Button", "Whisper", "Journey", "Laughter",
+                      "Spark", "History", "Melody", "Telescope", "Mystery",
+                      "Castle", "Courage", "Melody", "Jungle", "Sketch",
+                      "Festival", "Whisper", "Comfort", "Equation", "Painting",
+                      "Architect", "Dream", "Galaxy", "Whisper", "Library",
+                      "Balance", "Drama", "Compass", "Whisper", "Adventure",
+                      "Melody", "Volcano", "Poem", "Whisper", "Hero",
+                      "Restaurant", "Clock", "Whisper", "Bridge", "Symphony",
+                      "Telescope", "Whisper", "Theatre", "Comfort", "Melody",
+                      "Ocean", "Sculpture", "Microscope", "Whisper", "Legend",
+                      "Comfort", "Melody", "Forest", "Jewelry", "Experiment",
+                      "Whisper", "Friendship", "Comfort", "Orchestra", "Mountain",
+                      "Architect", "Whisper", "Knowledge", "Comfort", "Melody",
+                      "River", "Architect", "Whisper", "Creativity", "Comfort",
+                      "Symphony", "Desert", "Architect", "Whisper", "Discovery",
+                      "Comfort", "Opera", "Island", "Architect", "Whisper",
+                      "Inspiration", "Comfort", "Jazz", "City", "Architect",
+                      "Whisper", "Innovation", "Comfort", "Rock", "Star",
+                      "Architect", "Whisper", "Knowledge", "Comfort", "Blues",
+                      "Planet", "Architect", "Whisper", "Harmony", "Comfort",
+                      "Sunrise", "Sunset", "Rainbow", "Cloud", "Thunderstorm",
+                      "Machine", "Robot", "Technology", "Future", "Science Fiction",
+                      "Language", "Culture", "Tradition", "Travel", "Adventure",
+                      "Music", "Dance", "Art", "Performance", "Creativity",
+                      "Friendship", "Love", "Family", "Community", "Happiness",
+                      "Peace", "Hope", "Freedom", "Justice", "Equality",
+                      "Challenge", "Growth", "Learning", "Wisdom", "Knowledge",
+                      "Nature", "Environment", "Sustainability", "Conservation", "Ecology",
+                      "History", "Mythology", "Legend", "Story", "Fairytale",
+                      "Food", "Drink", "Restaurant", "Cooking", "Recipe"
                     ];
+
 
                     var randomIndex = Math.floor(Math.random() * randomWords.length);
                     var wordToSearch = randomWords[randomIndex];

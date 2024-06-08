@@ -151,7 +151,7 @@
 
                     var randomIndex = Math.floor(Math.random() * randomWords.length);
                     var wordToSearch = randomWords[randomIndex];
-                    previousTab = window.open('https://www.bing.com/search?q=' + wordToSearch + '&setmkt=en-IN&PC=EMMX01&form=LBT003&scope=web', '_blank');
+                    previousTab = window.open('https://www.bing.com/search?pglt=163&q=' + wordToSearch + '&cvid=' + generateCvid() + '&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCDEwMDVqMGoxqAIAsAIA&FORM=ANSPA1&PC=ASTS', '_blank');
                     if (!previousTab || previousTab.closed || typeof previousTab.closed == 'undefined') {
                         document.getElementById("errorMessage").style.display = "block";
                     }

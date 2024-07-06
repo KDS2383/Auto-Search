@@ -24,6 +24,8 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2245985202861234"
      crossorigin="anonymous"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -104,60 +106,50 @@
     </div>
 
     <script>
-        function startAutoSearch() {
+        async function getRandomWord() {
+            try {
+                const response = await axios.get('https://api.datamuse.com/words', {
+                    params: {
+                        ml: 'meaningful',
+                        max: 1000
+                    }
+                });
+
+                const words = response.data;
+                if (words.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * words.length);
+                    return words[randomIndex].word;
+                } else {
+                    return 'No words found';
+                }
+            } catch (error) {
+                console.error('Error fetching random word:', error);
+                return 'Error';
+            }
+        }
+
+        async function startAutoSearch() {
             var searchCount = parseInt(document.getElementById('searchCount').value);
             var delay = parseInt(document.getElementById('delay').value) * 1000;
             var previousTab;
 
             for (var i = 0; i < searchCount; i++) {
-                setTimeout(function () {
-                    if (previousTab) {
-                        previousTab.close(); // Close previous tab if exists
-                    }
+                (function(i) {
+                    setTimeout(async function () {
+                        if (previousTab) {
+                            previousTab.close(); // Close previous tab if exists
+                        }
 
-                   var randomWords = [
-                      "Butterfly", "Button", "Whisper", "Journey", "Laughter",
-                      "Spark", "History", "Melody", "Telescope", "Mystery",
-                      "Castle", "Courage", "Melody", "Jungle", "Sketch",
-                      "Festival", "Whisper", "Comfort", "Equation", "Painting",
-                      "Architect", "Dream", "Galaxy", "Whisper", "Library",
-                      "Balance", "Drama", "Compass", "Whisper", "Adventure",
-                      "Melody", "Volcano", "Poem", "Whisper", "Hero",
-                      "Restaurant", "Clock", "Whisper", "Bridge", "Symphony",
-                      "Telescope", "Whisper", "Theatre", "Comfort", "Melody",
-                      "Ocean", "Sculpture", "Microscope", "Whisper", "Legend",
-                      "Comfort", "Melody", "Forest", "Jewelry", "Experiment",
-                      "Whisper", "Friendship", "Comfort", "Orchestra", "Mountain",
-                      "Architect", "Whisper", "Knowledge", "Comfort", "Melody",
-                      "River", "Architect", "Whisper", "Creativity", "Comfort",
-                      "Symphony", "Desert", "Architect", "Whisper", "Discovery",
-                      "Comfort", "Opera", "Island", "Architect", "Whisper",
-                      "Inspiration", "Comfort", "Jazz", "City", "Architect",
-                      "Whisper", "Innovation", "Comfort", "Rock", "Star",
-                      "Architect", "Whisper", "Knowledge", "Comfort", "Blues",
-                      "Planet", "Architect", "Whisper", "Harmony", "Comfort",
-                      "Sunrise", "Sunset", "Rainbow", "Cloud", "Thunderstorm",
-                      "Machine", "Robot", "Technology", "Future", "Science Fiction",
-                      "Language", "Culture", "Tradition", "Travel", "Adventure",
-                      "Music", "Dance", "Art", "Performance", "Creativity",
-                      "Friendship", "Love", "Family", "Community", "Happiness",
-                      "Peace", "Hope", "Freedom", "Justice", "Equality",
-                      "Challenge", "Growth", "Learning", "Wisdom", "Knowledge",
-                      "Nature", "Environment", "Sustainability", "Conservation", "Ecology",
-                      "History", "Mythology", "Legend", "Story", "Fairytale",
-                      "Food", "Drink", "Restaurant", "Cooking", "Recipe"
-                    ];
-
-
-                    var randomIndex = Math.floor(Math.random() * randomWords.length);
-                    var wordToSearch = randomWords[randomIndex];
-                    previousTab = window.open('https://www.bing.com/search?pglt=163&q=' + wordToSearch + '&cvid=' + generateCvid() + '&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCDEwMDVqMGoxqAIAsAIA&FORM=ANSPA1&PC=ASTS', '_blank');
-                    if (!previousTab || previousTab.closed || typeof previousTab.closed == 'undefined') {
-                        document.getElementById("errorMessage").style.display = "block";
-                    }
-                }, i * delay);
+                        var wordToSearch = await getRandomWord();
+                        previousTab = window.open('https://www.bing.com/search?pglt=163&q=' + wordToSearch + '&cvid=' + generateCvid() + '&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCDEwMDVqMGoxqAIAsAIA&FORM=ANSPA1&PC=ASTS', '_blank');
+                        if (!previousTab || previousTab.closed || typeof previousTab.closed == 'undefined') {
+                            document.getElementById("errorMessage").style.display = "block";
+                        }
+                    }, i * delay);
+                })(i);
             }
         }
+
         function generateCvid() {
             let cvid = '';
             const characters = 'abcdef0123456789';
